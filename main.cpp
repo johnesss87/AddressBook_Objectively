@@ -4,8 +4,7 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     AddressBook addressBook;
     addressBook.userRegistration();
     addressBook.userRegistration();
