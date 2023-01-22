@@ -18,6 +18,8 @@ public:
         userManager.loadUsersFromFile();
         };
     void userRegistration();
+    void userLogIn();
+    void passwordChange();
     void showWholeUsers();
 };
 

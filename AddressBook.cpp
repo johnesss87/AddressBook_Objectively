@@ -8,6 +8,14 @@ void AddressBook::showWholeUsers() {
     userManager.showWholeUsers();
 }
 
+void AddressBook::userLogIn() {
+    userManager.userLogIn();
+}
+
+void AddressBook::passwordChange() {
+    userManager.passwordChange();
+}
+
 
 
 

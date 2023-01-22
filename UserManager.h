@@ -9,6 +9,7 @@
 
 #include "User.h"
 #include "UserFileManager.h"
+#include "SupportingMethods.h"
 
 using namespace std;
 
@@ -25,6 +26,8 @@ class UserManager {
 public:
     UserManager (string usersFileName) : userFileManager(usersFileName) {};
     void userRegistration();
+    void userLogIn();
+    void passwordChange();
     void showWholeUsers();
     void loadUsersFromFile();
 

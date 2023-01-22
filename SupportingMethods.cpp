@@ -7,3 +7,9 @@ string SupportingMethods::convertIntToString(int number) {
     return str;
 }
 
+string SupportingMethods::loadLine(){
+    string input = "";
+    getline(cin, input);
+    return input;
+}
+

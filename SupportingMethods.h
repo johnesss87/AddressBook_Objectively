@@ -10,6 +10,7 @@ class SupportingMethods {
 
 public:
     static string convertIntToString (int number);
+    static string loadLine();
 
 };
 
