@@ -22,7 +22,7 @@ class UserFileManager {
 public:
     UserFileManager();
     void addUserToFile(User user);
-    void loadUsersFromFile(vector <User> &users);
+    vector <User> loadUsersFromFile();
 
 };
 

@@ -39,9 +39,10 @@ string UserFileManager::userInfoSplitByVerticalLines(User user) {
     return lineWithUserInfo;
 }
 
-void UserFileManager::loadUsersFromFile(vector <User> &users){
-
+vector <User> UserFileManager::loadUsersFromFile()
+{
     User user;
+    vector <User> users;
     string userInfoSplitByVerticalLines = "";
 
     textFile.open(usersFileName.c_str(), ios::in);
@@ -53,9 +54,9 @@ void UserFileManager::loadUsersFromFile(vector <User> &users){
             user = downloadUserInfo(userInfoSplitByVerticalLines);
             users.push_back(user);
         }
-
+        textFile.close();
     }
-    textFile.close();
+    return users;
 }
 
 User UserFileManager::downloadUserInfo(string userInfoSplitByVerticalLines)
