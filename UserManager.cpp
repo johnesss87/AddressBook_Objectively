@@ -57,3 +57,6 @@ void UserManager::showWholeUsers() {
     }
 }
 
+void UserManager::loadUsersFromFile() {
+    userFileManager.loadUsersFromFile(users);
+}

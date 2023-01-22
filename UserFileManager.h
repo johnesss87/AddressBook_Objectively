@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <cstdlib>
 
 #include "User.h"
 #include "SupportingMethods.h"
@@ -16,10 +17,12 @@ class UserFileManager {
     bool isFileEmpty();
     string userInfoSplitByVerticalLines (User user);
     fstream textFile;
+    User downloadUserInfo(string userInfoSplitByVerticalLines);
 
 public:
     UserFileManager();
     void addUserToFile(User user);
+    void loadUsersFromFile(vector <User> &users);
 
 };
 

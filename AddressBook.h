@@ -11,11 +11,12 @@ class AddressBook
 
 {
 
-UserManager userManager;
+    UserManager userManager;
 
 public:
-  void userRegistration();
-  void showWholeUsers();
+    AddressBook();
+    void userRegistration();
+    void showWholeUsers();
 };
 
 #endif

@@ -25,6 +25,7 @@ class UserManager {
 public:
     void userRegistration();
     void showWholeUsers();
+    void loadUsersFromFile();
 
 };
 
