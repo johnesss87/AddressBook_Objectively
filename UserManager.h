@@ -23,6 +23,7 @@ class UserManager {
     UserFileManager userFileManager;
 
 public:
+    UserManager (string usersFileName) : userFileManager(usersFileName) {};
     void userRegistration();
     void showWholeUsers();
     void loadUsersFromFile();

@@ -13,17 +13,15 @@ using namespace std;
 
 class UserFileManager {
 
-    string usersFileName;
+    const string usersFileName;
     bool isFileEmpty();
     string userInfoSplitByVerticalLines (User user);
-    fstream textFile;
     User downloadUserInfo(string userInfoSplitByVerticalLines);
 
 public:
-    UserFileManager();
+    UserFileManager(string USERSFILENAME) : usersFileName(USERSFILENAME){};
     void addUserToFile(User user);
     vector <User> loadUsersFromFile();
-
 };
 
 #endif

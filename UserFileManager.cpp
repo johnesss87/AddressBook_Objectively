@@ -1,12 +1,9 @@
 #include "UserFileManager.h"
 
 
-UserFileManager::UserFileManager() {
-    usersFileName = "Users.txt";
-}
-
 void UserFileManager::addUserToFile(User user) {
     string lineWithUserInfo = "";
+    fstream textFile;
     textFile.open(usersFileName.c_str(), ios::app);
 
     if (textFile.good() == true) {
@@ -23,6 +20,7 @@ void UserFileManager::addUserToFile(User user) {
 }
 
 bool UserFileManager::isFileEmpty() {
+    fstream textFile;
     textFile.seekg(0, ios::end);
     if (textFile.tellg() == 0)
         return true;
@@ -44,6 +42,7 @@ vector <User> UserFileManager::loadUsersFromFile()
     User user;
     vector <User> users;
     string userInfoSplitByVerticalLines = "";
+    fstream textFile;
 
     textFile.open(usersFileName.c_str(), ios::in);
 
