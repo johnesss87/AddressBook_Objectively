@@ -6,11 +6,8 @@ using namespace std;
 
 int main() {
     AddressBook addressBook("Users.txt");
-    addressBook.userRegistration();
-    addressBook.userRegistration();
-    addressBook.userLogIn();
-    addressBook.passwordChange();
-    addressBook.showWholeUsers();
+    addressBook.chooseOptionFromMainMenu();
+//  addressBook.showWholeUsers();
 
     return 0;
 }

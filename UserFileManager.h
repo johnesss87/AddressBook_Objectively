@@ -22,6 +22,7 @@ public:
     UserFileManager(string USERSFILENAME) : usersFileName(USERSFILENAME){};
     void addUserToFile(User user);
     vector <User> loadUsersFromFile();
+    void saveAllUsersToFile(vector <User> users);
 };
 
 #endif

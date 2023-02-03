@@ -15,7 +15,6 @@ using namespace std;
 
 class UserManager {
 
-    int idLoggedUser;
     vector <User> users;
 
     User introduceNewUserInfo();
@@ -24,7 +23,10 @@ class UserManager {
     UserFileManager userFileManager;
 
 public:
-    UserManager (string usersFileName) : userFileManager(usersFileName) {};
+
+    UserManager(string usersFileName) : userFileManager(usersFileName) {};
+
+    int idLoggedUser;
     void userRegistration();
     void userLogIn();
     void passwordChange();

@@ -61,7 +61,7 @@ void UserManager::loadUsersFromFile() {
     users = userFileManager.loadUsersFromFile();
 }
 
-void UserManager::userLogIn(){
+void UserManager::userLogIn() {
 
     User user;
     string login = "", password = "";
@@ -87,19 +87,20 @@ void UserManager::userLogIn(){
                     return;
                 }
             }
-            cout << "Wprowadzono 3 razy bledne haslo." << endl;
+            cout << "Wprowadzono 3 razy bledne haslo. Zostaniesz cofniety do glownego menu." << endl;
             system("pause");
-            return; // just for now
+            idLoggedUser = 0;
+            return;
         }
         itr++;
     }
-    cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
+    cout << "Nie ma uzytkownika z takim loginem. Zostaniesz cofniety do glownego menu." << endl << endl;
     system("pause");
-    return; //just for now
+    idLoggedUser = 0;
+    return;
 }
 
-void UserManager::passwordChange()
-{
+void UserManager::passwordChange() {
     string newPassword = "";
     cout << "Podaj nowe haslo: ";
     newPassword = SupportingMethods::loadLine();
@@ -113,5 +114,5 @@ void UserManager::passwordChange()
             system("pause");
         }
     }
-//    zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
+    userFileManager.saveAllUsersToFile(users);
 }

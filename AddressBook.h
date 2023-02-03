@@ -2,25 +2,28 @@
 #define ADDRESSBOOK_H
 
 #include <iostream>
+#include <conio.h>
 
+#include "User.h"
 #include "UserManager.h"
+#include "ContactManager.h"
 
 using namespace std;
 
-class AddressBook
-
-{
+class AddressBook {
 
     UserManager userManager;
+    char choice;
 
 public:
-    AddressBook(string usersFileName) : userManager(usersFileName){
+    AddressBook(string usersFileName) : userManager(usersFileName) {
         userManager.loadUsersFromFile();
         };
-    void userRegistration();
-    void userLogIn();
+    void chooseOptionFromMainMenu();
+    void chooseOptionFromUserMenu();
     void passwordChange();
     void showWholeUsers();
+
 };
 
 #endif

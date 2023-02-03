@@ -37,8 +37,7 @@ string UserFileManager::userInfoSplitByVerticalLines(User user) {
     return lineWithUserInfo;
 }
 
-vector <User> UserFileManager::loadUsersFromFile()
-{
+vector <User> UserFileManager::loadUsersFromFile() {
     User user;
     vector <User> users;
     string userInfoSplitByVerticalLines = "";
@@ -58,8 +57,7 @@ vector <User> UserFileManager::loadUsersFromFile()
     return users;
 }
 
-User UserFileManager::downloadUserInfo(string userInfoSplitByVerticalLines)
-{
+User UserFileManager::downloadUserInfo(string userInfoSplitByVerticalLines) {
     User user;
     string lineWithUserInfo = "";
     int singleUserDataNumber = 1;
@@ -89,4 +87,37 @@ User UserFileManager::downloadUserInfo(string userInfoSplitByVerticalLines)
         }
     }
     return user;
+}
+
+void UserFileManager::saveAllUsersToFile(vector <User> users) {
+
+    string lineWithUserInfo = "";
+    fstream textFile;
+
+    vector <User>::iterator itrEnd = --users.end();
+
+    textFile.open(usersFileName.c_str(), ios::out);
+
+    if (textFile.good() == true)
+    {
+        for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
+        {
+            lineWithUserInfo = userInfoSplitByVerticalLines(*itr);
+
+            if (itr == itrEnd)
+            {
+               textFile << lineWithUserInfo;
+            }
+            else
+            {
+                textFile << lineWithUserInfo << endl;
+            }
+            lineWithUserInfo = "";
+        }
+    }
+    else
+    {
+        cout << "Nie mozna otworzyc pliku " << usersFileName << endl;
+    }
+    textFile.close();
 }
