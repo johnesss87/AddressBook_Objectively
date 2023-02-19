@@ -16,23 +16,19 @@ using namespace std;
 class UserManager {
 
     vector <User> users;
-
     User introduceNewUserInfo();
     int getNewUserId();
     bool loginExistance(string login);
     UserFileManager userFileManager;
 
 public:
-
     UserManager(string usersFileName) : userFileManager(usersFileName) {};
-
     int idLoggedUser;
     void userRegistration();
     void userLogIn();
     void passwordChange();
     void showWholeUsers();
     void loadUsersFromFile();
-
 };
 
 #endif

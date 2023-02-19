@@ -9,14 +9,12 @@ void AddressBook::chooseOptionFromMainMenu() {
             cout << "---------------------------" << endl;
             cout << "1. Rejestracja" << endl;
             cout << "2. Logowanie" << endl;
+            cout << "3. Wyswietl wszystkich uzytkownikow" << endl;
             cout << "9. Koniec programu" << endl;
             cout << "---------------------------" << endl;
             cout << "Twoj wybor: ";
 
-
-            choice = getch();
-
-//          choice = SupportingMethods::loadChar();
+            choice = SupportingMethods::loadChar();
 
             switch (choice) {
             case '1':
@@ -25,6 +23,9 @@ void AddressBook::chooseOptionFromMainMenu() {
             case '2':
                 userManager.userLogIn();
                 chooseOptionFromUserMenu();
+                break;
+            case '3':
+                userManager.showWholeUsers();
                 break;
             case '9':
                 cout << endl << "Good Bye" << endl;
@@ -41,7 +42,7 @@ void AddressBook::chooseOptionFromMainMenu() {
 
 void AddressBook::chooseOptionFromUserMenu() {
 
-    ContactManager contactManager;
+    ContactManager contactManager ("AddressBook.txt");
 
     while (userManager.idLoggedUser != 0) {
 
@@ -60,12 +61,12 @@ void AddressBook::chooseOptionFromUserMenu() {
         cout << "---------------------------" << endl;
         cout << "Twoj wybor: ";
 
-        choice = getch();
+        choice = SupportingMethods::loadChar();
 
         switch (choice) {
         case '1':
+            contactManager.loadContactsFromFile(userManager.idLoggedUser);
             contactManager.enterNewContact(userManager.idLoggedUser);
-            cout << endl << "wyszedlem" << endl;
             break;
         case '2':
 //               wyszukajAdresatowPoImieniu(adresaci);
@@ -74,6 +75,7 @@ void AddressBook::chooseOptionFromUserMenu() {
 //               wyszukajAdresatowPoNazwisku(adresaci);
             break;
         case '4':
+            contactManager.loadContactsFromFile(userManager.idLoggedUser);
             contactManager.showWholeContacts();
             break;
         case '5':
@@ -90,7 +92,6 @@ void AddressBook::chooseOptionFromUserMenu() {
             userManager.idLoggedUser = 0;
             cout << endl << "Uzytkownik zostal wylogowany!" << endl << endl;
             system("pause");
-//              adresaci.clear();
             break;
         default:
             cout << "Nie ma takiej opcji w menu!!!" << endl << endl;
@@ -98,10 +99,6 @@ void AddressBook::chooseOptionFromUserMenu() {
             break;
         }
     }
-}
-
-void AddressBook::showWholeUsers() {
-    userManager.showWholeUsers();
 }
 
 

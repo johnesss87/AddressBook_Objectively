@@ -21,9 +21,6 @@ public:
         };
     void chooseOptionFromMainMenu();
     void chooseOptionFromUserMenu();
-    void passwordChange();
-    void showWholeUsers();
-
 };
 
 #endif

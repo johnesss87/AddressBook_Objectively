@@ -1,6 +1,5 @@
 #include "UserFileManager.h"
 
-
 void UserFileManager::addUserToFile(User user) {
     string lineWithUserInfo = "";
     fstream textFile;
@@ -45,10 +44,8 @@ vector <User> UserFileManager::loadUsersFromFile() {
 
     textFile.open(usersFileName.c_str(), ios::in);
 
-    if (textFile.good() == true)
-    {
-        while (getline(textFile, userInfoSplitByVerticalLines))
-        {
+    if (textFile.good() == true) {
+        while (getline(textFile, userInfoSplitByVerticalLines)) {
             user = downloadUserInfo(userInfoSplitByVerticalLines);
             users.push_back(user);
         }
@@ -62,16 +59,11 @@ User UserFileManager::downloadUserInfo(string userInfoSplitByVerticalLines) {
     string lineWithUserInfo = "";
     int singleUserDataNumber = 1;
 
-    for (int charPosition = 0; charPosition < userInfoSplitByVerticalLines.length(); charPosition++)
-    {
-        if (userInfoSplitByVerticalLines[charPosition] != '|')
-        {
+    for (int charPosition = 0; charPosition < userInfoSplitByVerticalLines.length(); charPosition++) {
+        if (userInfoSplitByVerticalLines[charPosition] != '|') {
             lineWithUserInfo += userInfoSplitByVerticalLines[charPosition];
-        }
-        else
-        {
-            switch(singleUserDataNumber)
-            {
+        } else {
+            switch(singleUserDataNumber) {
             case 1:
                 user.setId(atoi(lineWithUserInfo.c_str()));
                 break;
@@ -98,25 +90,18 @@ void UserFileManager::saveAllUsersToFile(vector <User> users) {
 
     textFile.open(usersFileName.c_str(), ios::out);
 
-    if (textFile.good() == true)
-    {
-        for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
-        {
+    if (textFile.good() == true) {
+        for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++) {
             lineWithUserInfo = userInfoSplitByVerticalLines(*itr);
 
-            if (itr == itrEnd)
-            {
-               textFile << lineWithUserInfo;
-            }
-            else
-            {
+            if (itr == itrEnd) {
+                textFile << lineWithUserInfo;
+            } else {
                 textFile << lineWithUserInfo << endl;
             }
             lineWithUserInfo = "";
         }
-    }
-    else
-    {
+    } else {
         cout << "Nie mozna otworzyc pliku " << usersFileName << endl;
     }
     textFile.close();

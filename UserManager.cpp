@@ -51,10 +51,12 @@ bool UserManager::loginExistance(string login) {
 void UserManager::showWholeUsers() {
 
     for (int i=0; i < users.size(); i++) {
-        cout << users[i].getId() << endl;
-        cout << users[i].getLogin() << endl;
-        cout << users[i].getPassword() << endl;
+
+        cout << endl << "ID Uzytkownika:     " << users[i].getId() << endl;
+        cout << "Login:              " << users[i].getLogin() << endl;
+        cout << "Haslo:              " << users[i].getPassword() << endl;
     }
+    system("pause");
 }
 
 void UserManager::loadUsersFromFile() {
@@ -70,17 +72,13 @@ void UserManager::userLogIn() {
     login = SupportingMethods::loadLine();
 
     vector <User>::iterator itr = users.begin();
-    while (itr != users.end())
-    {
-        if (itr -> getLogin() == login)
-        {
-            for (int attempts = 3; attempts > 0; attempts--)
-            {
+    while (itr != users.end()) {
+        if (itr -> getLogin() == login) {
+            for (int attempts = 3; attempts > 0; attempts--) {
                 cout << "Podaj haslo. Pozostalo prob: " << attempts << ": ";
                 password = SupportingMethods::loadLine();
 
-                if (itr -> getPassword() == password)
-                {
+                if (itr -> getPassword() == password) {
                     cout << endl << "Zalogowales sie." << endl << endl;
                     system("pause");
                     idLoggedUser = itr -> getId();
@@ -105,10 +103,8 @@ void UserManager::passwordChange() {
     cout << "Podaj nowe haslo: ";
     newPassword = SupportingMethods::loadLine();
 
-    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
-    {
-        if (itr -> getId() == idLoggedUser)
-        {
+    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++) {
+        if (itr -> getId() == idLoggedUser) {
             itr -> setPassword(newPassword);
             cout << "Haslo zostalo zmienione." << endl << endl;
             system("pause");

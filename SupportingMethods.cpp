@@ -7,6 +7,15 @@ string SupportingMethods::convertIntToString(int number) {
     return str;
 }
 
+int SupportingMethods::convertStringToInt (string number) {
+
+    int numberInt;
+    istringstream iss(number);
+    iss >> numberInt;
+
+    return numberInt;
+}
+
 string SupportingMethods::loadLine() {
     string input = "";
     getline(cin, input);
@@ -17,12 +26,10 @@ char SupportingMethods::loadChar() {
     string input = "";
     char character = {0};
 
-    while (true)
-    {
+    while (true) {
         getline(cin, input);
 
-        if (input.length() == 1)
-        {
+        if (input.length() == 1) {
             character = input[0];
             break;
         }
@@ -31,11 +38,20 @@ char SupportingMethods::loadChar() {
     return character;
 }
 
-string changeFirstLetterToUppercaseAndRestToLowercase(string text) {
-    if (!text.empty())
-    {
+string SupportingMethods::changeFirstLetterToUppercaseAndRestToLowercase(string text) {
+    if (!text.empty()) {
         transform(text.begin(), text.end(), text.begin(), ::tolower);
         text[0] = toupper(text[0]);
     }
     return text;
+}
+
+string SupportingMethods::downloadNumber(string text, int charPosition) {
+    string number = "";
+    while(isdigit(text[charPosition]) == true) {
+
+        number += text[charPosition];
+        charPosition ++;
+    }
+    return number;
 }
