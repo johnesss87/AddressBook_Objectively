@@ -20,10 +20,12 @@ class UserManager {
     int getNewUserId();
     bool loginExistance(string login);
     UserFileManager userFileManager;
+    int idLoggedUser = 0;
 
 public:
     UserManager(string usersFileName) : userFileManager(usersFileName) {};
-    int idLoggedUser;
+    void setIdLoggedUser(int newIdLoggedUser);
+    int getIdLoggedUser();
     void userRegistration();
     void userLogIn();
     void passwordChange();

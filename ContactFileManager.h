@@ -24,7 +24,7 @@ class ContactFileManager {
     void setIdLastContactFromFile(int idLastContact);
 
 public:
-    ContactFileManager(string contactsFileName) : contactsFileName(contactsFileName){};
+    ContactFileManager(string CONTACTSFILENAME) : contactsFileName(CONTACTSFILENAME){};
     void addContactToFile(Contact contact);
     vector <Contact> loadContactsFromFile(int idLoggedUser);
     int getIdLastContactFromFile();

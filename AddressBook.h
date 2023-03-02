@@ -4,7 +4,6 @@
 #include <iostream>
 #include <conio.h>
 
-#include "User.h"
 #include "UserManager.h"
 #include "ContactManager.h"
 
@@ -13,14 +12,21 @@ using namespace std;
 class AddressBook {
 
     UserManager userManager;
-    char choice;
+    ContactManager contactManager;
 
 public:
-    AddressBook(string usersFileName) : userManager(usersFileName) {
+    AddressBook(string usersFileName, string contactsFileName) : userManager(usersFileName), contactManager(contactsFileName)  {
         userManager.loadUsersFromFile();
         };
-    void chooseOptionFromMainMenu();
-    void chooseOptionFromUserMenu();
+    int idLoggedUser();
+    void userRegistration();
+    void userLogIn();
+    void UserLogOut();
+    void showWholeUsers();
+    void loadContactsFromFile();
+    void enterNewContact();
+    void showWholeContacts();
+    void passwordChange();
 };
 
 #endif

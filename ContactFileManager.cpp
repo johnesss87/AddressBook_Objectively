@@ -82,7 +82,7 @@ Contact ContactFileManager::downloadContactInfo(string contactInfoSplitByVertica
     string lineWithContactInfo = "";
     int singleContactDataNumber = 1;
 
-    for (int charPosition = 0; charPosition < contactInfoSplitByVerticalLines.length(); charPosition++) {
+    for (int charPosition = 0; charPosition < (int)contactInfoSplitByVerticalLines.length(); charPosition++) {
 
         if (contactInfoSplitByVerticalLines[charPosition] != '|') {
 

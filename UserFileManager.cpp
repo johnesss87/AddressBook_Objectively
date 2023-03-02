@@ -59,7 +59,7 @@ User UserFileManager::downloadUserInfo(string userInfoSplitByVerticalLines) {
     string lineWithUserInfo = "";
     int singleUserDataNumber = 1;
 
-    for (int charPosition = 0; charPosition < userInfoSplitByVerticalLines.length(); charPosition++) {
+    for (int charPosition = 0; charPosition < (int)userInfoSplitByVerticalLines.length(); charPosition++) {
         if (userInfoSplitByVerticalLines[charPosition] != '|') {
             lineWithUserInfo += userInfoSplitByVerticalLines[charPosition];
         } else {

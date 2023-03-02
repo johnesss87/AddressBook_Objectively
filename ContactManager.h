@@ -20,12 +20,15 @@ class ContactManager {
     int getNewContactId();
     void showContactInfo(Contact contact);
     ContactFileManager contactFileManager;
+    int idLoggedUser;
+    void setIdLoggedUser(int getIdLoggedUserFromUserManager);
 
 public:
     ContactManager(string contactsFileName) : contactFileManager(contactsFileName) {};
     void enterNewContact(int idLoggedUser);
     void showWholeContacts();
     void loadContactsFromFile(int idLoggedUser);
+    void contactsVectorCleanUp();
 };
 
 #endif

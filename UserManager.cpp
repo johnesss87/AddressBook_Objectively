@@ -1,5 +1,14 @@
 #include "UserManager.h"
 
+void UserManager::setIdLoggedUser(int newIdLoggedUser) {
+    if (newIdLoggedUser >= 0)
+        idLoggedUser = newIdLoggedUser;
+}
+
+int UserManager::getIdLoggedUser() {
+    return idLoggedUser;
+}
+
 void UserManager::userRegistration() {
 
     User user = introduceNewUserInfo();
@@ -41,7 +50,7 @@ int UserManager::getNewUserId() {
 
 bool UserManager::loginExistance(string login) {
 
-    for (int i=0; i < users.size(); i++) {
+    for (int i=0; i < (int)users.size(); i++) {
         if (users[i].getLogin() == login)
             return true;
     }
@@ -50,7 +59,7 @@ bool UserManager::loginExistance(string login) {
 
 void UserManager::showWholeUsers() {
 
-    for (int i=0; i < users.size(); i++) {
+    for (int i=0; i < (int)users.size(); i++) {
 
         cout << endl << "ID Uzytkownika:     " << users[i].getId() << endl;
         cout << "Login:              " << users[i].getLogin() << endl;

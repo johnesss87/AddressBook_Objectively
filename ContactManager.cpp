@@ -1,5 +1,10 @@
 #include "ContactManager.h"
 
+void ContactManager::setIdLoggedUser(int getIdLoggedUserFromUserManager) {
+    if (getIdLoggedUserFromUserManager >= 0)
+        idLoggedUser = getIdLoggedUserFromUserManager;
+}
+
 void ContactManager::enterNewContact(int idLoggedUser) {
 
     int idLastContact = contactFileManager.getIdLastContactFromFile();
@@ -82,4 +87,8 @@ void ContactManager::showContactInfo(Contact contact) {
 
 void ContactManager::loadContactsFromFile(int idLoggedUser) {
     contacts = contactFileManager.loadContactsFromFile(idLoggedUser);
+}
+
+void ContactManager::contactsVectorCleanUp(){
+    contacts.clear();
 }
