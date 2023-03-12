@@ -1,8 +1,4 @@
-#include <iostream>
-
 #include "AddressBook.h"
-
-using namespace std;
 
 int main() {
 
@@ -43,8 +39,6 @@ int main() {
                 break;
             }
         } else {
-
-            addressBook.loadContactsFromFile();
 
             system("cls");
             cout << " >>> MENU UZYTKOWNIKA <<<" << endl;

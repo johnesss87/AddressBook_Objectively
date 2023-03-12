@@ -6,6 +6,9 @@ void AddressBook::userRegistration() {
 
 void AddressBook::userLogIn() {
     userManager.userLogIn();
+    if (userManager.checkUserLoggedIn()) {
+        contactManager = new ContactManager(CONTACTS_FILE_NAME,userManager.getIdLoggedUser());
+    }
 }
 
 int AddressBook::idLoggedUser() {
@@ -13,24 +16,26 @@ int AddressBook::idLoggedUser() {
 }
 
 void AddressBook::UserLogOut() {
-    userManager.setIdLoggedUser(0);
-    contactManager.contactsVectorCleanUp();
+    userManager.userLogOut();
+    delete contactManager;
+    contactManager = NULL;
 }
 
 void AddressBook::showWholeUsers() {
     userManager.showWholeUsers();
 }
 
-void AddressBook::loadContactsFromFile() {
-    contactManager.loadContactsFromFile(userManager.getIdLoggedUser());
-}
-
 void AddressBook::enterNewContact() {
-    contactManager.enterNewContact(userManager.getIdLoggedUser());
+    if (userManager.checkUserLoggedIn()) {
+        contactManager->enterNewContact();
+    } else {
+        cout << "Aby dodac adresata, nalezy najpierw sie zalogowac" << endl;
+        system("pause");
+    }
 }
 
 void AddressBook::showWholeContacts() {
-    contactManager.showWholeContacts();
+    contactManager->showWholeContacts();
 }
 
 void AddressBook::passwordChange() {

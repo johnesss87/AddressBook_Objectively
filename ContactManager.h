@@ -1,34 +1,24 @@
 #ifndef CONTACTMANAGER_H
 #define CONTACTMANAGER_H
 
-#include <iostream>
-#include <vector>
-#include <windows.h>
-#include <fstream>
-#include <sstream>
-
-#include "Contact.h"
 #include "ContactFileManager.h"
-#include "SupportingMethods.h"
-
-using namespace std;
 
 class ContactManager {
 
+    const int ID_LOGGED_USER;
     vector <Contact> contacts;
-    Contact introduceNewContactInfo(int idLoggedUser, int idLastContact);
+    Contact introduceNewContactInfo();
     int getNewContactId();
     void showContactInfo(Contact contact);
     ContactFileManager contactFileManager;
-    int idLoggedUser;
-    void setIdLoggedUser(int getIdLoggedUserFromUserManager);
 
 public:
-    ContactManager(string contactsFileName) : contactFileManager(contactsFileName) {};
-    void enterNewContact(int idLoggedUser);
+    ContactManager(string contactsFileName, int idLoggedUser)
+        : contactFileManager(contactsFileName), ID_LOGGED_USER(idLoggedUser) {
+            contacts = contactFileManager.loadContactsFromFile(ID_LOGGED_USER);
+        };
+    void enterNewContact();
     void showWholeContacts();
-    void loadContactsFromFile(int idLoggedUser);
-    void contactsVectorCleanUp();
 };
 
 #endif

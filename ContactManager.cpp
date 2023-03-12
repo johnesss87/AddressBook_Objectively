@@ -1,35 +1,30 @@
 #include "ContactManager.h"
 
-void ContactManager::setIdLoggedUser(int getIdLoggedUserFromUserManager) {
-    if (getIdLoggedUserFromUserManager >= 0)
-        idLoggedUser = getIdLoggedUserFromUserManager;
-}
-
-void ContactManager::enterNewContact(int idLoggedUser) {
-
-    int idLastContact = contactFileManager.getIdLastContactFromFile();
+void ContactManager::enterNewContact() {
 
     system("cls");
 
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
 
-    Contact contact = introduceNewContactInfo(idLoggedUser, idLastContact);
+    Contact contact = introduceNewContactInfo();
 
     contacts.push_back(contact);
-    contactFileManager.addContactToFile(contact);
-
-    cout << endl << "Adresat zostal pomyslnie dodany" << endl <<endl;
+    if (contactFileManager.addContactToFile(contact)) {
+        cout << endl << "Adresat zostal pomyslnie dodany." << endl;
+    } else {
+        cout << "Blad. Nie udalo sie dodac adresata do pliku." << endl;
+    }
     system("pause");
 }
 
-Contact ContactManager::introduceNewContactInfo(int idLoggedUser, int idLastContact) {
+Contact ContactManager::introduceNewContactInfo() {
 
     Contact contact;
 
     string name, surname, phoneNumber, email, address;
 
-    contact.setIdUser(idLoggedUser);
-    contact.setIdContact(++idLastContact);
+    contact.setIdUser(ID_LOGGED_USER);
+    contact.setIdContact(contactFileManager.getIdLastContact() + 1);
 
     cout << "Podaj imie: ";
     name = SupportingMethods::loadLine();
@@ -60,6 +55,7 @@ Contact ContactManager::introduceNewContactInfo(int idLoggedUser, int idLastCont
 void ContactManager::showWholeContacts() {
 
     system("cls");
+
     if (!contacts.empty()) {
         cout << "             >>> ADRESACI <<<" << endl;
         cout << "-----------------------------------------------" << endl;
@@ -83,12 +79,4 @@ void ContactManager::showContactInfo(Contact contact) {
     cout << "Numer telefonu:     " << contact.getPhoneNumber() << endl;
     cout << "Email:              " << contact.getEmail() << endl;
     cout << "Adres:              " << contact.getAddress() << endl;
-}
-
-void ContactManager::loadContactsFromFile(int idLoggedUser) {
-    contacts = contactFileManager.loadContactsFromFile(idLoggedUser);
-}
-
-void ContactManager::contactsVectorCleanUp(){
-    contacts.clear();
 }

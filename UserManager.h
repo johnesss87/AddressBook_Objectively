@@ -1,17 +1,7 @@
 #ifndef USERMANAGER_H
 #define USERMANAGER_H
 
-#include <iostream>
-#include <vector>
-#include <windows.h>
-#include <fstream>
-#include <sstream>
-
-#include "User.h"
 #include "UserFileManager.h"
-#include "SupportingMethods.h"
-
-using namespace std;
 
 class UserManager {
 
@@ -20,17 +10,20 @@ class UserManager {
     int getNewUserId();
     bool loginExistance(string login);
     UserFileManager userFileManager;
-    int idLoggedUser = 0;
+    int idLoggedUser;
 
 public:
-    UserManager(string usersFileName) : userFileManager(usersFileName) {};
-    void setIdLoggedUser(int newIdLoggedUser);
+    UserManager(string usersFileName) : userFileManager(usersFileName) {
+        idLoggedUser = 0;
+        users = userFileManager.loadUsersFromFile();
+    };
     int getIdLoggedUser();
     void userRegistration();
     void userLogIn();
     void passwordChange();
     void showWholeUsers();
-    void loadUsersFromFile();
+    bool checkUserLoggedIn();
+    void userLogOut();
 };
 
 #endif

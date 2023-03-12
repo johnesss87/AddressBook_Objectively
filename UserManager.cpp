@@ -1,10 +1,5 @@
 #include "UserManager.h"
 
-void UserManager::setIdLoggedUser(int newIdLoggedUser) {
-    if (newIdLoggedUser >= 0)
-        idLoggedUser = newIdLoggedUser;
-}
-
 int UserManager::getIdLoggedUser() {
     return idLoggedUser;
 }
@@ -14,9 +9,11 @@ void UserManager::userRegistration() {
     User user = introduceNewUserInfo();
 
     users.push_back(user);
-    userFileManager.addUserToFile(user);
-
-    cout << endl << "Konto zalozono pomyslnie" << endl << endl;
+    if (userFileManager.addUserToFile(user)) {
+        cout << endl << "Konto zalozono pomyslnie." << endl << endl;
+    } else {
+        cout << "Blad. Nie udalo sie zalozyc konta." << endl;
+    }
     system("pause");
 }
 
@@ -68,10 +65,6 @@ void UserManager::showWholeUsers() {
     system("pause");
 }
 
-void UserManager::loadUsersFromFile() {
-    users = userFileManager.loadUsersFromFile();
-}
-
 void UserManager::userLogIn() {
 
     User user;
@@ -120,4 +113,15 @@ void UserManager::passwordChange() {
         }
     }
     userFileManager.saveAllUsersToFile(users);
+}
+
+bool UserManager::checkUserLoggedIn() {
+    if (idLoggedUser > 0)
+        return true;
+    else
+        return false;
+}
+
+void UserManager::userLogOut() {
+    idLoggedUser = 0;
 }

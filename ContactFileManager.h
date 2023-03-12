@@ -1,33 +1,28 @@
 #ifndef CONTACTFILEMANAGER_H
 #define CONTACTFILEMANAGER_H
 
-#include <iostream>
 #include <vector>
-#include <fstream>
-#include <cstdlib>
-#include <string>
 
 #include "Contact.h"
 #include "SupportingMethods.h"
 
-using namespace std;
-
 class ContactFileManager {
 
-    const string contactsFileName;
+    const string CONTACTS_FILE_NAME;
     bool isFileEmpty();
     string contactInfoSplitByVerticalLines (Contact contact);
     Contact downloadContactInfo(string contactInfoSplitByVerticalLines);
     int downloadUserIdfromInfoSplitByVerticalLines(string contactInfoSplitByVerticalLines);
     int downloadContactIdfromInfoSplitByVerticalLines(string contactInfoSplitByVerticalLines);
-    int idLastContactFromFile;
-    void setIdLastContactFromFile(int idLastContact);
+    int idLastContact;
 
 public:
-    ContactFileManager(string CONTACTSFILENAME) : contactsFileName(CONTACTSFILENAME){};
-    void addContactToFile(Contact contact);
+    ContactFileManager(string contactsFileName) : CONTACTS_FILE_NAME(contactsFileName){
+    idLastContact = 0;
+    };
+    bool addContactToFile(Contact contact);
     vector <Contact> loadContactsFromFile(int idLoggedUser);
-    int getIdLastContactFromFile();
+    int getIdLastContact();
 };
 
 #endif

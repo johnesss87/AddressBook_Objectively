@@ -18,6 +18,7 @@ int SupportingMethods::convertStringToInt (string number) {
 
 string SupportingMethods::loadLine() {
     string input = "";
+    cin.sync();
     getline(cin, input);
     return input;
 }
@@ -27,6 +28,7 @@ char SupportingMethods::loadChar() {
     char character = {0};
 
     while (true) {
+        cin.sync();
         getline(cin, input);
 
         if (input.length() == 1) {
@@ -54,4 +56,12 @@ string SupportingMethods::downloadNumber(string text, int charPosition) {
         charPosition ++;
     }
     return number;
+}
+
+bool SupportingMethods::isFileEmpty(fstream &textFile) {
+    textFile.seekg(0, ios::end);
+    if (textFile.tellg() == 0)
+        return true;
+    else
+        return false;
 }

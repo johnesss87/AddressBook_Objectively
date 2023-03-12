@@ -1,22 +1,23 @@
 #include "ContactFileManager.h"
 
-void ContactFileManager::addContactToFile(Contact contact) {
+bool ContactFileManager::addContactToFile(Contact contact) {
     string lineWithContactInfo = "";
     fstream textFile;
-    textFile.open(contactsFileName.c_str(), ios::out | ios::app);
+    textFile.open(CONTACTS_FILE_NAME.c_str(), ios::out | ios::app);
 
     if (textFile.good() == true) {
         lineWithContactInfo = contactInfoSplitByVerticalLines(contact);
 
-        if (isFileEmpty() == true) {
+        if (SupportingMethods::isFileEmpty(textFile) == true) {
             textFile << lineWithContactInfo;
         } else {
             textFile << endl << lineWithContactInfo ;
         }
-    } else {
-        cout << "Nie udalo sie otworzyc pliku i zapisac w nim danych." << endl;
+        idLastContact++;
+        textFile.close();
+        return true;
     }
-    textFile.close();
+    return false;
 }
 
 bool ContactFileManager::isFileEmpty() {
@@ -46,12 +47,11 @@ string ContactFileManager::contactInfoSplitByVerticalLines(Contact contact) {
 vector <Contact> ContactFileManager::loadContactsFromFile(int idLoggedUser) {
     Contact contact;
     vector <Contact> contacts;
-    int idLastContact = 0;
     string contactInfoSplitByVerticalLines = "";
     string infoLastContactInFile = "";
     fstream textFile;
 
-    textFile.open(contactsFileName.c_str(), ios::in);
+    textFile.open(CONTACTS_FILE_NAME.c_str(), ios::in);
 
     if (textFile.good() == true) {
 
@@ -70,10 +70,11 @@ vector <Contact> ContactFileManager::loadContactsFromFile(int idLoggedUser) {
 
     if (infoLastContactInFile != "") {
         idLastContact = downloadContactIdfromInfoSplitByVerticalLines(infoLastContactInFile);
-    } else {
-        idLastContact = 0;
+
+//    } else {
+//        idLastContact = 0;
     }
-    setIdLastContactFromFile(idLastContact);
+//    setIdLastContactFromFile(idLastContact);
     return contacts;
 }
 
@@ -119,23 +120,17 @@ Contact ContactFileManager::downloadContactInfo(string contactInfoSplitByVertica
     return contact;
 }
 
-void ContactFileManager::setIdLastContactFromFile(int idLastContact) {
-    idLastContactFromFile = idLastContact;
-}
-
-int ContactFileManager::getIdLastContactFromFile() {
-    return idLastContactFromFile;
+int ContactFileManager::getIdLastContact() {
+    return idLastContact;
 }
 
 int ContactFileManager::downloadUserIdfromInfoSplitByVerticalLines(string contactInfoSplitByVerticalLines) {
-
     int idUserStartingPosition = contactInfoSplitByVerticalLines.find_first_of('|') + 1;
     int idUser = SupportingMethods::convertStringToInt(SupportingMethods::downloadNumber(contactInfoSplitByVerticalLines, idUserStartingPosition));
     return idUser;
 }
 
 int ContactFileManager::downloadContactIdfromInfoSplitByVerticalLines(string contactInfoSplitByVerticalLines) {
-
     int idContactStartingPosition = 0;
     int idLastContactFromFile = SupportingMethods::convertStringToInt(SupportingMethods::downloadNumber(contactInfoSplitByVerticalLines,idContactStartingPosition));
     return idLastContactFromFile;

@@ -1,30 +1,22 @@
 #include "UserFileManager.h"
 
-void UserFileManager::addUserToFile(User user) {
+bool UserFileManager::addUserToFile(User user) {
     string lineWithUserInfo = "";
     fstream textFile;
-    textFile.open(usersFileName.c_str(), ios::app);
+    textFile.open(USERS_FILE_NAME.c_str(), ios::app);
 
     if (textFile.good() == true) {
         lineWithUserInfo = userInfoSplitByVerticalLines(user);
 
-        if (isFileEmpty() == true) {
+        if (SupportingMethods::isFileEmpty(textFile) == true) {
             textFile << lineWithUserInfo;
         } else {
             textFile << endl << lineWithUserInfo ;
         }
-    } else
-        cout << "Nie udalo sie otworzyc pliku " << usersFileName << " i zapisac w nim danych." << endl;
-    textFile.close();
-}
-
-bool UserFileManager::isFileEmpty() {
-    fstream textFile;
-    textFile.seekg(0, ios::end);
-    if (textFile.tellg() == 0)
+        textFile.close();
         return true;
-    else
-        return false;
+    }
+    return false;
 }
 
 string UserFileManager::userInfoSplitByVerticalLines(User user) {
@@ -42,7 +34,7 @@ vector <User> UserFileManager::loadUsersFromFile() {
     string userInfoSplitByVerticalLines = "";
     fstream textFile;
 
-    textFile.open(usersFileName.c_str(), ios::in);
+    textFile.open(USERS_FILE_NAME.c_str(), ios::in);
 
     if (textFile.good() == true) {
         while (getline(textFile, userInfoSplitByVerticalLines)) {
@@ -88,7 +80,7 @@ void UserFileManager::saveAllUsersToFile(vector <User> users) {
 
     vector <User>::iterator itrEnd = --users.end();
 
-    textFile.open(usersFileName.c_str(), ios::out);
+    textFile.open(USERS_FILE_NAME.c_str(), ios::out);
 
     if (textFile.good() == true) {
         for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++) {
@@ -102,7 +94,7 @@ void UserFileManager::saveAllUsersToFile(vector <User> users) {
             lineWithUserInfo = "";
         }
     } else {
-        cout << "Nie mozna otworzyc pliku " << usersFileName << endl;
+        cout << "Nie mozna otworzyc pliku " << USERS_FILE_NAME << endl;
     }
     textFile.close();
 }
