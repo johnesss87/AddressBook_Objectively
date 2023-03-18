@@ -5,10 +5,10 @@ bool ContactFileManager::addContactToFile(Contact contact) {
     fstream textFile;
     textFile.open(CONTACTS_FILE_NAME.c_str(), ios::out | ios::app);
 
-    if (textFile.good() == true) {
+    if (textFile.good()) {
         lineWithContactInfo = contactInfoSplitByVerticalLines(contact);
 
-        if (SupportingMethods::isFileEmpty(textFile) == true) {
+        if (SupportingMethods::isFileEmpty(textFile)) {
             textFile << lineWithContactInfo;
         } else {
             textFile << endl << lineWithContactInfo ;
@@ -18,15 +18,6 @@ bool ContactFileManager::addContactToFile(Contact contact) {
         return true;
     }
     return false;
-}
-
-bool ContactFileManager::isFileEmpty() {
-    fstream textFile;
-    textFile.seekg(0, ios::end);
-    if (textFile.tellg() == 0)
-        return true;
-    else
-        return false;
 }
 
 string ContactFileManager::contactInfoSplitByVerticalLines(Contact contact) {
@@ -53,7 +44,7 @@ vector <Contact> ContactFileManager::loadContactsFromFile(int idLoggedUser) {
 
     textFile.open(CONTACTS_FILE_NAME.c_str(), ios::in);
 
-    if (textFile.good() == true) {
+    if (textFile.good()) {
 
         while (getline(textFile, contactInfoSplitByVerticalLines)) {
 
@@ -70,11 +61,7 @@ vector <Contact> ContactFileManager::loadContactsFromFile(int idLoggedUser) {
 
     if (infoLastContactInFile != "") {
         idLastContact = downloadContactIdfromInfoSplitByVerticalLines(infoLastContactInFile);
-
-//    } else {
-//        idLastContact = 0;
     }
-//    setIdLastContactFromFile(idLastContact);
     return contacts;
 }
 

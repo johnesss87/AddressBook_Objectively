@@ -9,7 +9,6 @@
 class ContactFileManager {
 
     const string CONTACTS_FILE_NAME;
-    bool isFileEmpty();
     string contactInfoSplitByVerticalLines (Contact contact);
     Contact downloadContactInfo(string contactInfoSplitByVerticalLines);
     int downloadUserIdfromInfoSplitByVerticalLines(string contactInfoSplitByVerticalLines);
@@ -18,7 +17,7 @@ class ContactFileManager {
 
 public:
     ContactFileManager(string contactsFileName) : CONTACTS_FILE_NAME(contactsFileName){
-    idLastContact = 0;
+        idLastContact = 0;
     };
     bool addContactToFile(Contact contact);
     vector <Contact> loadContactsFromFile(int idLoggedUser);

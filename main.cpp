@@ -62,10 +62,10 @@ int main() {
                 addressBook.enterNewContact();
                 break;
             case '2':
-//               wyszukajAdresatowPoImieniu(adresaci);
+                addressBook.searchByName();
                 break;
             case '3':
-//               wyszukajAdresatowPoNazwisku(adresaci);
+                addressBook.searchBySurname();
                 break;
             case '4':
                 addressBook.showWholeContacts();

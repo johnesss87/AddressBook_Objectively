@@ -5,10 +5,10 @@ bool UserFileManager::addUserToFile(User user) {
     fstream textFile;
     textFile.open(USERS_FILE_NAME.c_str(), ios::app);
 
-    if (textFile.good() == true) {
+    if (textFile.good()) {
         lineWithUserInfo = userInfoSplitByVerticalLines(user);
 
-        if (SupportingMethods::isFileEmpty(textFile) == true) {
+        if (SupportingMethods::isFileEmpty(textFile)) {
             textFile << lineWithUserInfo;
         } else {
             textFile << endl << lineWithUserInfo ;
@@ -36,7 +36,7 @@ vector <User> UserFileManager::loadUsersFromFile() {
 
     textFile.open(USERS_FILE_NAME.c_str(), ios::in);
 
-    if (textFile.good() == true) {
+    if (textFile.good()) {
         while (getline(textFile, userInfoSplitByVerticalLines)) {
             user = downloadUserInfo(userInfoSplitByVerticalLines);
             users.push_back(user);
@@ -82,7 +82,7 @@ void UserFileManager::saveAllUsersToFile(vector <User> users) {
 
     textFile.open(USERS_FILE_NAME.c_str(), ios::out);
 
-    if (textFile.good() == true) {
+    if (textFile.good()) {
         for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++) {
             lineWithUserInfo = userInfoSplitByVerticalLines(*itr);
 

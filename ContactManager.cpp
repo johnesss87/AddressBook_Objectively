@@ -80,3 +80,75 @@ void ContactManager::showContactInfo(Contact contact) {
     cout << "Email:              " << contact.getEmail() << endl;
     cout << "Adres:              " << contact.getAddress() << endl;
 }
+
+void ContactManager::numberOfSearchedContacts(int contactNumbers)
+{
+    if (contactNumbers == 0)
+        cout << endl << "W ksiazce adresowej nie ma adresatow z tymi danymi." << endl;
+    else
+        cout << endl << "Ilosc adresatow w ksiazce adresowej wynosi: " << contactNumbers << endl << endl;
+}
+
+void ContactManager::searchByName()
+{
+    string searchedName = "";
+    int contactNumbers = 0;
+
+    system("cls");
+    if (!contacts.empty())
+    {
+        cout << ">>> WYSZUKIWANIE ADRESATOW O IMIENIU <<<" << endl << endl;
+
+        cout << "Wyszukaj adresatow o imieniu: ";
+        searchedName = SupportingMethods::loadLine();
+        searchedName = SupportingMethods::changeFirstLetterToUppercaseAndRestToLowercase(searchedName);
+
+        for (vector <Contact>::iterator  itr = contacts.begin(); itr != contacts.end(); itr++)
+        {
+            if (itr -> getName() == searchedName)
+            {
+                showContactInfo(*itr);
+                contactNumbers++;
+            }
+        }
+        numberOfSearchedContacts(contactNumbers);
+    }
+    else
+    {
+        cout << endl << "Ksiazka adresowa jest pusta" << endl << endl;
+    }
+    cout << endl;
+    system("pause");
+}
+
+void ContactManager::searchBySurname()
+{
+    string searchedSurname;
+    int contactNumbers = 0;
+
+    system("cls");
+    if (!contacts.empty())
+    {
+        cout << ">>> WYSZUKIWANIE ADRESATOW O NAZWISKU <<<" << endl << endl;
+
+        cout << "Wyszukaj adresatow o nazwisku: ";
+        searchedSurname = SupportingMethods::loadLine();
+        searchedSurname = SupportingMethods::changeFirstLetterToUppercaseAndRestToLowercase(searchedSurname);
+
+        for (vector <Contact>::iterator itr = contacts.begin(); itr != contacts.end(); itr++)
+        {
+            if (itr -> getSurname() == searchedSurname)
+            {
+                showContactInfo(*itr);
+                contactNumbers++;
+            }
+        }
+         numberOfSearchedContacts(contactNumbers);
+    }
+    else
+    {
+        cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
+    }
+    cout << endl;
+    system("pause");
+}

@@ -16,8 +16,8 @@ public:
         contactManager = NULL;
     };
     ~AddressBook() {
-    delete contactManager;
-    contactManager = NULL;
+        delete contactManager;
+        contactManager = NULL;
     };
     int idLoggedUser();
     void userRegistration();
@@ -26,6 +26,8 @@ public:
     void showWholeUsers();
     void enterNewContact();
     void showWholeContacts();
+    void searchByName();
+    void searchBySurname();
     void passwordChange();
 };
 

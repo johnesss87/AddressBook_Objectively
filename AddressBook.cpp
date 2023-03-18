@@ -38,6 +38,14 @@ void AddressBook::showWholeContacts() {
     contactManager->showWholeContacts();
 }
 
+void AddressBook::searchByName() {
+    contactManager->searchByName();
+}
+
+void AddressBook::searchBySurname() {
+    contactManager->searchBySurname();
+}
+
 void AddressBook::passwordChange() {
     userManager.passwordChange();
 }

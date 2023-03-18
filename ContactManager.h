@@ -10,15 +10,18 @@ class ContactManager {
     Contact introduceNewContactInfo();
     int getNewContactId();
     void showContactInfo(Contact contact);
+    void numberOfSearchedContacts(int contactNumbers);
     ContactFileManager contactFileManager;
 
 public:
     ContactManager(string contactsFileName, int idLoggedUser)
-        : contactFileManager(contactsFileName), ID_LOGGED_USER(idLoggedUser) {
+        : ID_LOGGED_USER(idLoggedUser), contactFileManager(contactsFileName) {
             contacts = contactFileManager.loadContactsFromFile(ID_LOGGED_USER);
         };
     void enterNewContact();
     void showWholeContacts();
+    void searchByName();
+    void searchBySurname();
 };
 
 #endif
