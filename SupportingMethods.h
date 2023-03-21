@@ -4,7 +4,6 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
-#include <fstream>
 
 using namespace std;
 
@@ -17,7 +16,7 @@ public:
     static char loadChar();
     static string changeFirstLetterToUppercaseAndRestToLowercase(string text);
     static string downloadNumber (string text, int charPosition);
-    static bool isFileEmpty(fstream &textFile);
+    static int loadInteger();
 };
 
 #endif

@@ -46,9 +46,14 @@ void AddressBook::searchBySurname() {
     contactManager->searchBySurname();
 }
 
+void AddressBook::deleteContactFromAddressBook() {
+    contactManager->deleteContactFromAddressBook();
+}
+
+void AddressBook::editContact() {
+    contactManager->editContact();
+}
+
 void AddressBook::passwordChange() {
     userManager.passwordChange();
 }
-
-
-

@@ -28,6 +28,8 @@ public:
     void showWholeContacts();
     void searchByName();
     void searchBySurname();
+    void deleteContactFromAddressBook();
+    void editContact();
     void passwordChange();
 };
 

@@ -3,12 +3,12 @@
 bool ContactFileManager::addContactToFile(Contact contact) {
     string lineWithContactInfo = "";
     fstream textFile;
-    textFile.open(CONTACTS_FILE_NAME.c_str(), ios::out | ios::app);
+    textFile.open(getTextFileName().c_str(), ios::out | ios::app);
 
     if (textFile.good()) {
         lineWithContactInfo = contactInfoSplitByVerticalLines(contact);
 
-        if (SupportingMethods::isFileEmpty(textFile)) {
+        if (isTextFileEmpty()) {
             textFile << lineWithContactInfo;
         } else {
             textFile << endl << lineWithContactInfo ;
@@ -42,7 +42,7 @@ vector <Contact> ContactFileManager::loadContactsFromFile(int idLoggedUser) {
     string infoLastContactInFile = "";
     fstream textFile;
 
-    textFile.open(CONTACTS_FILE_NAME.c_str(), ios::in);
+     textFile.open(getTextFileName().c_str(), ios::in);
 
     if (textFile.good()) {
 
@@ -123,8 +123,166 @@ int ContactFileManager::downloadContactIdfromInfoSplitByVerticalLines(string con
     return idLastContactFromFile;
 }
 
+void ContactFileManager::removeContactFromFile(int idContactNumberToDelete, bool lastContactPointer) {
 
+    string line = "", spiltLine = "";
+    fstream readTextFile, tempTextFile;
 
+    readTextFile.open(getTextFileName().c_str(), ios::in);
+    tempTextFile.open("Temp.txt", ios::out | ios::app);
 
+    if (readTextFile.good()) {
+        while(getline(readTextFile,line)) {
+            int switchNumber = 1;
+            int removedLinePointer = 0;
 
+            for (int i = 0, j = 0; i < (int) line.length(); i++) {
+                if (line[i] == '|') {
+                    spiltLine = line.substr(j,i-j);
 
+                    switch(switchNumber) {
+                    case 1:
+                        if (idContactNumberToDelete == atoi(spiltLine.c_str())) {
+                            removedLinePointer = 1;
+                            break;
+                        } else {
+                            tempTextFile << atoi(spiltLine.c_str()) << "|";
+                            break;
+                        }
+                    case 2:
+                        if (removedLinePointer == 1) {
+                            break;
+                        } else {
+                            tempTextFile << atoi(spiltLine.c_str()) << "|";
+                            break;
+                        }
+                    case 3:
+                        if (removedLinePointer == 1) {
+                            break;
+                        } else {
+                            tempTextFile << spiltLine << "|";
+                            break;
+                        }
+                    case 4:
+                        if (removedLinePointer == 1) {
+                            break;
+                        } else {
+                            tempTextFile << spiltLine << "|";
+                            break;
+                        }
+                    case 5:
+                        if (removedLinePointer == 1) {
+                            break;
+                        } else {
+                            tempTextFile << spiltLine << "|";
+                            break;
+                        }
+                    case 6:
+                        if (removedLinePointer == 1) {
+                            break;
+                        } else {
+                            tempTextFile << spiltLine << "|";
+                            break;
+                        }
+                    case 7:
+                        if (removedLinePointer == 1) {
+                            break;
+                        } else {
+                            tempTextFile << spiltLine << "|" << endl;
+                            break;
+                        }
+                    }
+                    j=i+1;
+                    switchNumber++;
+                }
+            }
+        }
+        readTextFile.close(), tempTextFile.close();
+        remove (getTextFileName().c_str());
+        rename("Temp.txt", getTextFileName().c_str());
+
+        if (lastContactPointer == true)
+        {
+           --idLastContact;
+        }
+    }
+}
+
+void ContactFileManager::makeChangeInFile (vector <Contact> contacts, int contactLinePointer) {
+
+    string line = "", spiltLine = "";
+    fstream readTextFile, tempTextFile;
+
+    readTextFile.open(getTextFileName().c_str(), ios::in);
+    tempTextFile.open("Temp.txt", ios::out | ios::app);
+
+    if (readTextFile.good()) {
+        while(getline(readTextFile,line)) {
+            int switchNumber = 1;
+            int changedLinePointer = 0;
+
+            for (int i = 0, j = 0; i < (int) line.length(); i++) {
+                if (line[i] == '|') {
+                    spiltLine = line.substr(j,i-j);
+
+                    switch(switchNumber) {
+                    case 1:
+                        tempTextFile << atoi(spiltLine.c_str()) << "|";
+                        if (contacts[contactLinePointer].getIdContact() == atoi(spiltLine.c_str())) {
+                            changedLinePointer = 1;
+                        }
+                        break;
+                    case 2:
+                        tempTextFile << atoi(spiltLine.c_str()) << "|";
+                        break;
+                    case 3:
+                        if (changedLinePointer == 1) {
+                            tempTextFile << contacts[contactLinePointer].getName() << "|";
+                            break;
+                        } else {
+                            tempTextFile << spiltLine << "|";
+                            break;
+                        }
+                    case 4:
+                        if (changedLinePointer == 1) {
+                            tempTextFile << contacts[contactLinePointer].getSurname() << "|";
+                            break;
+                        } else {
+                            tempTextFile << spiltLine << "|";
+                            break;
+                        }
+                    case 5:
+                        if (changedLinePointer == 1) {
+                            tempTextFile << contacts[contactLinePointer].getPhoneNumber() << "|";
+                            break;
+                        } else {
+                            tempTextFile << spiltLine << "|";
+                            break;
+                        }
+                    case 6:
+                        if (changedLinePointer == 1) {
+                            tempTextFile << contacts[contactLinePointer].getEmail() << "|";
+                            break;
+                        } else {
+                            tempTextFile << spiltLine << "|";
+                            break;
+                        }
+                    case 7:
+                        if (changedLinePointer == 1) {
+                            tempTextFile << contacts[contactLinePointer].getAddress() << "|" << endl;
+                            break;
+                        } else {
+                            tempTextFile << spiltLine << "|" << endl;
+                            break;
+                        }
+                    }
+                    j=i+1;
+                    switchNumber++;
+                }
+            }
+        }
+        readTextFile.close(), tempTextFile.close();
+        remove (getTextFileName().c_str());
+        rename("Temp.txt", getTextFileName().c_str());
+    }
+}

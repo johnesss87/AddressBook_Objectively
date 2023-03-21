@@ -71,11 +71,10 @@ int main() {
                 addressBook.showWholeContacts();
                 break;
             case '5':
-//                idUsunietegoAdresata = usunAdresata(adresaci);
-//                idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
+                addressBook.deleteContactFromAddressBook();
                 break;
             case '6':
-//                edytujAdresata(adresaci);
+                addressBook.editContact();
                 break;
             case '7':
                 addressBook.passwordChange();

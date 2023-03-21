@@ -3,12 +3,12 @@
 bool UserFileManager::addUserToFile(User user) {
     string lineWithUserInfo = "";
     fstream textFile;
-    textFile.open(USERS_FILE_NAME.c_str(), ios::app);
+    textFile.open(getTextFileName().c_str(), ios::app);
 
     if (textFile.good()) {
         lineWithUserInfo = userInfoSplitByVerticalLines(user);
 
-        if (SupportingMethods::isFileEmpty(textFile)) {
+        if (isTextFileEmpty()) {
             textFile << lineWithUserInfo;
         } else {
             textFile << endl << lineWithUserInfo ;
@@ -34,7 +34,7 @@ vector <User> UserFileManager::loadUsersFromFile() {
     string userInfoSplitByVerticalLines = "";
     fstream textFile;
 
-    textFile.open(USERS_FILE_NAME.c_str(), ios::in);
+    textFile.open(getTextFileName().c_str(), ios::in);
 
     if (textFile.good()) {
         while (getline(textFile, userInfoSplitByVerticalLines)) {
@@ -80,7 +80,7 @@ void UserFileManager::saveAllUsersToFile(vector <User> users) {
 
     vector <User>::iterator itrEnd = --users.end();
 
-    textFile.open(USERS_FILE_NAME.c_str(), ios::out);
+    textFile.open(getTextFileName().c_str(), ios::out);
 
     if (textFile.good()) {
         for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++) {
@@ -94,7 +94,7 @@ void UserFileManager::saveAllUsersToFile(vector <User> users) {
             lineWithUserInfo = "";
         }
     } else {
-        cout << "Nie mozna otworzyc pliku " << USERS_FILE_NAME << endl;
+        cout << "Nie mozna otworzyc pliku " << getTextFileName() << endl;
     }
     textFile.close();
 }

@@ -58,10 +58,17 @@ string SupportingMethods::downloadNumber(string text, int charPosition) {
     return number;
 }
 
-bool SupportingMethods::isFileEmpty(fstream &textFile) {
-    textFile.seekg(0, ios::end);
-    if (textFile.tellg() == 0)
-        return true;
-    else
-        return false;
+int SupportingMethods::loadInteger() {
+    string input = "";
+    int number = 0;
+
+    while (true) {
+        getline(cin, input);
+
+        stringstream myStream(input);
+        if (myStream >> number)
+            break;
+        cout << "To nie jest liczba. Wpisz ponownie. " << endl;
+    }
+    return number;
 }

@@ -11,6 +11,8 @@ class ContactManager {
     int getNewContactId();
     void showContactInfo(Contact contact);
     void numberOfSearchedContacts(int contactNumbers);
+    int enterIdContact();
+    char selectOptionFromEditMenu();
     ContactFileManager contactFileManager;
 
 public:
@@ -22,8 +24,8 @@ public:
     void showWholeContacts();
     void searchByName();
     void searchBySurname();
+    void deleteContactFromAddressBook();
+    void editContact();
 };
 
 #endif
-
-
